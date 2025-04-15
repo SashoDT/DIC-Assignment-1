@@ -4,9 +4,9 @@ import json
 # todo: install and import mrjob
 # todo: logging
 
-stopwords =r"C:\Users\hanna\OneDrive\Uni\4. Semester\dic\ex1\ex1\stopwords.txt"
+stopwords =r"stopwords.txt"
 
-file_path = r"C:\Users\hanna\OneDrive\Uni\4. Semester\dic\ex1\ex1\reviews_devset.json"
+file_path = r"reviews_devset.json"
 
 with open(stopwords, 'r', encoding='utf-8') as f:
     stopwords = set(line.strip().lower() for line in f if line.strip())
