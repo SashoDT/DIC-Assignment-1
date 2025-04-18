@@ -1,0 +1,40 @@
+# Difficulties: 
+Very difficult to understand how syntax of MRJob works, 
+e.g.    how does DIC_runner call "make_runner()", "cat_output()", "parse_output()"; 
+        what is a runner, how does MRJob even run, does it always call a function named steps()? 
+Also difficulties to understand how to pass files with bash into python script 
+Difficult to figure out how to compute A,B,C,D variables 
+
+# Steps: 
+First added the prep.py lines to our mapper; oriented by using assignment0 files 
+
+Noticed that reading in stopwords file for every json-file line is inefficient 
+-> Lead to v2, where stopwords file location can be passed in bash and read in only once 
+also yields key pairs instead 
+
+Next implement mapper and reducer to yield variables for ChiSquare computation: 
+- Added 4 yield commands to mapper, to count different variables, 
+every variable in ChiSquare can be computed from those numbers (big breakthrough). 
+- Reducer is just the counter from assignment0 
+- Next have to edit the runner script to give out the counters and compute 
+ChiSquare statistic 
+
+Now we need to order the terms and preserve the top 75 terms per category: 
+- Sort terms by ChiSquare values and keep top 75 by using nlargest()
+- Output just by using simple for-loop and print() 
+
+
+# Run: 
+Use sth like this to run in console (change "local" if ran in lbd and add paths): 
+"python DIC_runner.py -r local --stopwords stopwords.txt reviews_devset.json > word_count.txt"
+
+
+
+**Recap of the variable names for ChiSquare from the lecture:** 
+- t ... term  
+- c ... category  
+- A ... number of documents in c which contain t  
+- B ... number of documents not in c which contain t  
+- C ... number of documents in c without t  
+- D ... number of documents not in c without t  
+- N ... total number of retrieved documents  (can be ommited for ranking)

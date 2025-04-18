@@ -16,6 +16,8 @@ with open(stopwords, 'r', encoding='utf-8') as f:
 delimiters = r"[ \t\d\(\)\[\]\{\}\.\!\?,;:+=\-_'\"`~#@&\*\%€\$§\\/]+"
 
 cleaned_reviews = []
+all_terms = set() # All unique terms 
+all_categories = set() # All unique categories 
 
 with open(file_path, 'r', encoding='utf-8') as f:
     for line in f:
@@ -30,7 +32,7 @@ with open(file_path, 'r', encoding='utf-8') as f:
         tokens = [token.lower() for token in tokens]
 
         # Stopword and one-character filtering
-        filtered = [token for token in tokens if token not in stopwords and len(token) > 1]
+        filtered = set([token for token in tokens if token not in stopwords and len(token) > 1])
 
         cleaned_reviews.append({ # feel free to change when/how the data is returned for later
             'reviewerID': review.get('reviewerID'),
@@ -38,6 +40,9 @@ with open(file_path, 'r', encoding='utf-8') as f:
             'tokens': filtered,
             'category': category
         })
+
+        all_terms.update(filtered)
+        all_categories.add(category)
 
 # just to understand what is happening
 for r in cleaned_reviews:
