@@ -35,11 +35,15 @@ How to run on lbd cluster:
 - unzip: unzip Assignment1.zip
 - change directory if zip contains folder Assignment1, else skip: cd Assignment1
 - list files, if needed: ls - 1
-- run: 
+- run (small dataset): 
     python DIC_runner.py --stopwords stopwords.txt --hadoop-streaming-jar \
     /usr/lib/hadoop/tools/lib/hadoop-streaming-3.3.6.jar \
     -r hadoop hdfs:///user/dic25_shared/amazon-reviews/full/reviews_devset.json > output.txt
 
+- run (large dataset): 
+    python DIC_runner.py --stopwords stopwords.txt --hadoop-streaming-jar \
+    /usr/lib/hadoop/tools/lib/hadoop-streaming-3.3.6.jar \
+    -r hadoop hdfs:///user/dic25_shared/amazon-reviews/full/reviewscombined.json > output.txt
 
 **Recap of the variable names for ChiSquare from the lecture:** 
 - t ... term  
