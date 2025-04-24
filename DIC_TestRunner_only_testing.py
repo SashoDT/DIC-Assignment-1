@@ -5,8 +5,10 @@
 from MapReduce_v3 import MapReduce
 from heapq import nlargest 
 from collections import defaultdict 
+import time
 
 if __name__ == '__main__':
+    start = time.time()
     
     n_tc = {} # A
     n_term = {} # A + B 
@@ -27,6 +29,8 @@ if __name__ == '__main__':
                 n_category.update({(key[1]):value})
             elif key[0] == "n_documents": 
                 n_documents = value 
+                
+    MRend = time.time()
 
     # Compute ChiSquare: 
     chiSquare = defaultdict(list) # built {c:[(chiSquare,t),...]} instead of {(t,c):chiSquare} for tactical reasons 
@@ -41,8 +45,8 @@ if __name__ == '__main__':
     ChiSquare_top75 = {
         c: [(t, v) for v, t in nlargest(75, valueToken)]
         for c, valueToken in chiSquare.items()
-    }  
-    
+    }
+
     # Output (to get the txt-file, use the bash command "> output.txt"): 
     unique_terms = set()
 
@@ -53,10 +57,15 @@ if __name__ == '__main__':
             #terms.append(t)
             unique_terms.add(t)
         print("\n", end = "")
-       
 
     #One line containing the merged dictionary (all terms space-separated and ordered alphabetically)
     print(" ".join(sorted(unique_terms)))
     
-
+    end = time.time()
+    print("start:", start)
+    print("MRJob:", MRend)
+    print("end:", end)
+    print("MRJob Time elapsed:", MRend - start)
+    print("Total Time elapsed:", end - start)
+    
     

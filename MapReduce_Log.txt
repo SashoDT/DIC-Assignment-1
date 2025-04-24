@@ -53,3 +53,60 @@ How to run on lbd cluster:
 - C ... number of documents in c without t  
 - D ... number of documents not in c without t  
 - N ... total number of retrieved documents  (can be ommited for ranking)
+
+
+# New Chapter: MapReduce_v3 
+Need to improve computation time drastically by introducing: 
+- Major change: Combiner, what it does: https://www.geeksforgeeks.org/mapreduce-combiners/ 
+- Minor change: Moved "delimiters" to stopwords mapper to reduce calling and computing this often (per json record)
+- Minor change: Skipped try/except with get(filename, "") and set.discard("")
+
+Also added file DIC_TestRunner_only_testing.py which is only for testing. 
+It measures the time and outputs it at the end of the output.txt file. 
+Note that if it runs like 2 min on the small dataset, this would not mean that 
+it would need 2*1000 min to run on the large dataset. The combiner works best on large datasets. 
+Also note that the time also depends on the server load. 
+
+# Results log of small dataset: 
+
+- 24.04.2025, original MapReduce_v2, DIC_runner: 
+    start: 1745493540.5206335
+    MRJob: 1745493654.9700916
+    end: 1745493655.7207308
+    MRJob Time elapsed: 114.44945812225342
+    Total Time elapsed: 115.20009732246399
+
+- 24.04.2025, MapReduce_v3 (add combiner), DIC_runner: 
+    start: 1745494861.717979
+    MRJob: 1745494968.9713297
+    end: 1745494969.5808668
+    MRJob Time elapsed: 107.2533507347107
+    Total Time elapsed: 107.86288785934448
+
+- 24.04.2025, MapReduce_v3 (add combiner, move delimiters), DIC_runner: 
+    start: 1745497647.6800425
+    MRJob: 1745497750.851694
+    end: 1745497751.6463783
+    MRJob Time elapsed: 103.17165160179138
+    Total Time elapsed: 103.96633577346802
+
+    start: 1745498324.1590958
+    MRJob: 1745498424.28417
+    end: 1745498425.0451283
+    MRJob Time elapsed: 100.1250741481781
+    Total Time elapsed: 100.88603258132935
+
+# Results log of large dataset: 
+- 24.04.2025, MapReduce_v3 (add combiner, move delimiters), DIC_runner: 
+    start: 1745498513.4807856
+    MRJob: 1745500334.4827776
+    end: 1745500365.1184752
+    MRJob Time elapsed: 1821.0019919872284
+    Total Time elapsed: 1851.637689590454
+
+- 24.04.2025, MapReduce_v3 (add combiner, move delimiters), DIC_runner_v2: 
+    start: 1745501039.3094435
+    MRJob: 1745503167.0330524
+    end: 1745503198.280696
+    MRJob Time elapsed: 2127.723608970642
+    Total Time elapsed: 2158.9712524414062

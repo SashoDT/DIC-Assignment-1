@@ -2,7 +2,7 @@
 
 # runner script to run the Word Count
 
-from MapReduce_v2 import MapReduce
+from MapReduce_v3 import MapReduce
 from heapq import nlargest 
 from collections import defaultdict 
 
