@@ -1,10 +1,10 @@
 # DIC-Assignment-1
 # Run: 
-Use sth like this to run in console (change "local" if ran in lbd and add paths): 
+Use something like this to run in console (change "local" if ran in lbd and add paths): 
 "python DIC_runner.py -r local --stopwords stopwords.txt reviews_devset.json > word_count.txt"
 
 How to run on lbd cluster: 
-- create zip-file out of "DIC_runner", "MapReduce_v2", "stopwords.txt" and maybe small json data file into folder Assignment1 (name here: Assignment1.zip)
+- create zip-file out of "DIC_runner_v2", "MapReduce_v3", "stopwords.txt" and maybe small json data file into folder Assignment1 (name here: Assignment1.zip)
 - upload: scp Assignment1.zip e{studentID}@lbd.tuwien.ac.at:. 
 - login: ssh e{studentID}@lbd.tuwien.ac.at 
 - unzip: unzip Assignment1.zip
